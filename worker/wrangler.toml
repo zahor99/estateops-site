@@ -1,0 +1,11 @@
+name = "estateops-form"
+main = "worker.js"
+compatibility_date = "2024-11-06"
+
+[vars]
+AIRTABLE_BASE = "appMolqG43PsOuIYy"
+AIRTABLE_TABLE = "Website Leads"
+
+# AIRTABLE_PAT is a SECRET — never put it here. Set it with:
+#   wrangler secret put AIRTABLE_PAT
+# Use a NARROWLY-SCOPED Airtable PAT: scope data.records:write on the EstateOps base (appMolqG43PsOuIYy) only.
