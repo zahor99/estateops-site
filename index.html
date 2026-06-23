@@ -234,6 +234,26 @@
   .form-ok h3{font-size:24px;color:var(--cream)}
   .form-ok p{color:var(--cream-60);font-size:14.5px;margin-top:10px}
 
+  /* BOOKING (Calendly primary) */
+  .booking-in{position:relative}
+  .booking-head{max-width:64ch;margin-bottom:clamp(26px,3.6vw,38px)}
+  .booking-head h2{font-size:clamp(30px,4.6vw,48px)}
+  .booking-head .lead{color:var(--cream-60);margin-top:18px}
+  .booking-cal{background:var(--cream);border:1px solid var(--hair-light);border-radius:16px;padding:clamp(8px,1.2vw,14px);box-shadow:var(--shadow)}
+  .booking-cal .calendly-inline-widget{border-radius:10px;overflow:hidden;min-height:720px}
+  .cal-fallback{text-align:center;font-size:13px;color:var(--ink-55);padding:13px 14px 5px;line-height:1.55}
+  .cal-fallback a{color:var(--claret-2);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  .booking-alt{margin-top:24px;max-width:780px}
+  .booking-alt details{background:rgba(247,242,234,.04);border:1px solid var(--hair-light);border-radius:14px;padding:2px clamp(18px,2.4vw,26px)}
+  .booking-alt summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;font-family:var(--serif);font-size:clamp(17px,2vw,20px);font-weight:600;color:var(--cream)}
+  .booking-alt summary::-webkit-details-marker{display:none}
+  .booking-alt summary .pm{position:relative;width:20px;height:20px;flex-shrink:0}
+  .booking-alt summary .pm::before,.booking-alt summary .pm::after{content:"";position:absolute;background:var(--gold);border-radius:2px;transition:transform .25s}
+  .booking-alt summary .pm::before{top:9px;left:2px;width:16px;height:2px}
+  .booking-alt summary .pm::after{top:2px;left:9px;width:2px;height:16px}
+  .booking-alt details[open] summary .pm::after{transform:rotate(90deg);opacity:0}
+  .booking-alt .alt-intro{color:var(--cream-60);font-size:14px;margin:0 0 18px;max-width:62ch}
+
   /* FOOTER */
   footer{background:var(--claret-deep);color:var(--cream-60);border-top:1px solid var(--hair-light);padding-block:46px}
   .foot-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:38px;align-items:start}
@@ -266,7 +286,7 @@
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="nav-cta" href="#audit">Book a leak audit</a>
+    <a class="nav-cta" href="#audit">Book a call</a>
   </div>
 </header>
 
@@ -291,7 +311,7 @@
       <h1>The revenue your firm is quietly <span class="em">leaking</span> — recovered.</h1>
       <p class="hero-lead">EstateOps is the operational layer that plugs the documented leak points in an estate-planning practice. We start where the money already is: the prospects you've paid to generate and never closed.</p>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="#audit">Book a free leak audit
+        <a class="btn btn-gold" href="#audit">Book your free intake audit
           <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a class="btn btn-ghost-l" href="#leaks">See the leak map</a>
       </div>
@@ -464,30 +484,43 @@
   </div>
 </section>
 
-<!-- CTA -->
+<!-- BOOKING -->
 <section class="cta" id="audit">
   <div class="hero-bg" aria-hidden="true"><svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><g stroke="#C2A05A" stroke-width="1" stroke-opacity=".18" fill="none"><path d="M-50 200 H400 L520 320 H1000 M520 320 L640 460 H1100"/></g><g fill="#C2A05A" fill-opacity=".4"><circle cx="400" cy="200" r="4"/><circle cx="520" cy="320" r="5"/></g><g fill="#3C9669" fill-opacity=".4"><circle cx="1100" cy="460" r="4"/></g></svg></div>
-  <div class="wrap cta-in">
-    <div class="reveal">
-      <span class="eyebrow">Free leak audit</span>
-      <h2 style="margin-top:14px">See exactly what you're leaking.</h2>
-      <p class="lead">We'll map where your firm is most likely losing signed revenue, and what the dormant list alone is worth — on your real numbers. No deck, no obligation.</p>
+  <div class="wrap booking-in">
+    <div class="booking-head reveal">
+      <span class="eyebrow">Free intake audit</span>
+      <h2 style="margin-top:14px">Book your free intake audit.</h2>
+      <p class="lead">We'll map where your firm is most likely losing signed revenue, and what the dormant list alone is worth — on your real numbers. Pick a time that works for you; no deck, no obligation.</p>
     </div>
-    <div class="cta-card reveal">
-      <form id="leadForm" novalidate>
-        <div class="field"><label for="name">Name <span class="req">*</span></label><input id="name" name="name" type="text" autocomplete="name" required placeholder="Jane Doe, Esq."></div>
-        <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@firm.com"></div>
-        <div class="field"><label for="company">Firm</label><input id="company" name="company" type="text" autocomplete="organization" placeholder="Doe Estate Law"></div>
-        <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567"></div>
-        <div class="field full"><label for="referral">How did you hear about us?</label>
-          <select id="referral" name="referral"><option value="">Choose…</option><option>NAEPC council</option><option>WealthCounsel forum</option><option>Referral / colleague</option><option>Search</option><option>LinkedIn</option><option>Other</option></select></div>
-        <div class="field full"><label for="comments">Your biggest leak right now? (optional)</label><textarea id="comments" name="comments" placeholder="e.g. dormant inquiries we never followed up, unfunded trusts…"></textarea></div>
-        <input class="hp" type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <p class="err-msg" id="errMsg">Please enter your name and a valid email.</p>
-        <button class="btn btn-gold" type="submit" id="submitBtn">Book my leak audit</button>
-        <p class="cta-note">For solo &amp; small estate-planning firms. We'll never share your data, and there's no obligation.</p>
-      </form>
-      <div class="form-ok" id="formOk"><h3>Thanks — we'll be in touch.</h3><p>We'll review your firm and reach out to schedule your leak audit.</p></div>
+
+    <div class="booking-cal reveal">
+      <!-- Calendly inline widget begin -->
+      <div class="calendly-inline-widget" data-url="https://calendly.com/gergelyracz0/30min?hide_gdpr_banner=1&amp;background_color=f7f2ea&amp;text_color=25201e&amp;primary_color=5a1e2b" style="min-width:320px;height:720px;"></div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      <!-- Calendly inline widget end -->
+      <p class="cal-fallback">Calendar not loading? Email <a href="mailto:hello@estateops.io?subject=EstateOps%20intake%20audit">hello@estateops.io</a> and we'll send you a few times that work.</p>
+    </div>
+
+    <div class="booking-alt reveal">
+      <details>
+        <summary>Not ready to book a call? Send your numbers instead <span class="pm" aria-hidden="true"></span></summary>
+        <p class="alt-intro">Tell us a little about your firm and we'll prepare your leak audit, then follow up to find a time.</p>
+        <form id="leadForm" novalidate>
+          <div class="field"><label for="name">Name <span class="req">*</span></label><input id="name" name="name" type="text" autocomplete="name" required placeholder="Jane Doe, Esq."></div>
+          <div class="field"><label for="email">Email <span class="req">*</span></label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@firm.com"></div>
+          <div class="field"><label for="company">Firm</label><input id="company" name="company" type="text" autocomplete="organization" placeholder="Doe Estate Law"></div>
+          <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567"></div>
+          <div class="field full"><label for="referral">How did you hear about us?</label>
+            <select id="referral" name="referral"><option value="">Choose…</option><option>NAEPC council</option><option>WealthCounsel forum</option><option>Referral / colleague</option><option>Search</option><option>LinkedIn</option><option>Other</option></select></div>
+          <div class="field full"><label for="comments">Your biggest leak right now? (optional)</label><textarea id="comments" name="comments" placeholder="e.g. dormant inquiries we never followed up, unfunded trusts…"></textarea></div>
+          <input class="hp" type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="err-msg" id="errMsg">Please enter your name and a valid email.</p>
+          <button class="btn btn-gold" type="submit" id="submitBtn">Send my numbers</button>
+          <p class="cta-note">For solo &amp; small estate-planning firms. We'll never share your data, and there's no obligation.</p>
+        </form>
+        <div class="form-ok" id="formOk"><h3>Thanks — we'll be in touch.</h3><p>We'll review your firm and reach out to schedule your intake audit.</p></div>
+      </details>
     </div>
   </div>
 </section>
@@ -502,7 +535,7 @@
         <p class="foot-comp">EstateOps is a marketing-operations platform for law firms. It is not a law firm, does not provide legal advice, and does not draft estate-planning documents. ROI figures shown are modeled estimates from documented industry economics, not guarantees of results. EstateOps operates alongside your existing drafting and practice-management tools.</p>
       </div>
       <nav class="foot-links" aria-label="Footer">
-        <a href="#leaks">The leaks</a><a href="#how">How it works</a><a href="#roi">ROI</a><a href="#pricing">Pricing</a><a href="#audit">Book a leak audit</a>
+        <a href="#leaks">The leaks</a><a href="#how">How it works</a><a href="#roi">ROI</a><a href="#pricing">Pricing</a><a href="#audit">Book a call</a>
       </nav>
     </div>
     <div class="foot-bot">© 2026 EstateOps</div>
@@ -559,7 +592,7 @@
       if(!ENDPOINT||ENDPOINT==='REPLACE_WITH_WORKER_URL'){try{var s=JSON.parse(localStorage.getItem('eo_leads')||'[]');s.push(payload);localStorage.setItem('eo_leads',JSON.stringify(s));}catch(_){}return ok();}
       btn.disabled=true;btn.textContent='Sending…';
       try{var r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw 0;ok();}
-      catch(_){btn.disabled=false;btn.textContent='Book my leak audit';err.textContent='Something went wrong — please try again.';err.style.display='block';}
+      catch(_){btn.disabled=false;btn.textContent='Send my numbers';err.textContent='Something went wrong — please try again.';err.style.display='block';}
     });
   })();
 </script>
