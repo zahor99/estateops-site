@@ -169,7 +169,11 @@
     connectTimer = setTimeout(()=>{ if(!callActive){ try{ if(vapi) vapi.stop(); }catch(e){} busy=false; actBtn.disabled=false; setBtn("start","Try again"); setStatus("error","Couldn’t connect. Please try again."); } }, 15000);
     try{
       const mod = await import(CONFIG.sdkUrl);
-      const Vapi = mod.default || mod.Vapi || mod;
+      // jsDelivr +esm double-wraps the CJS default → class is at mod.default.default
+      const Vapi = (typeof mod.default === "function") ? mod.default
+                 : (mod.default && typeof mod.default.default === "function") ? mod.default.default
+                 : (typeof mod.Vapi === "function") ? mod.Vapi
+                 : (typeof mod === "function") ? mod : null;
       if(typeof Vapi !== "function") throw new Error("Vapi SDK failed to load");
       if(!vapi){ vapi = new Vapi(CONFIG.publicKey); wire(); }
       await vapi.start(CONFIG.assistantId);

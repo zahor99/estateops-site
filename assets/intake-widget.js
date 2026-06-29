@@ -153,10 +153,21 @@
     if (text != null) statusText.textContent = text;
   }
 
+  function _resolveVapi(mod) {
+    // jsDelivr's +esm build double-wraps the CJS default: the Vapi class lands
+    // at mod.default.default, NOT mod.default. Resolve defensively across shapes.
+    if (!mod) return null;
+    if (typeof mod === "function") return mod;
+    if (typeof mod.default === "function") return mod.default;
+    if (mod.default && typeof mod.default.default === "function") return mod.default.default;
+    if (typeof mod.Vapi === "function") return mod.Vapi;
+    return null;
+  }
+
   function loadSdk() {
     if (sdkPromise) return sdkPromise;
     sdkPromise = import(CONFIG.sdkUrl).then(function (mod) {
-      var Vapi = mod && (mod.default || mod.Vapi || mod);
+      var Vapi = _resolveVapi(mod);
       if (typeof Vapi !== "function") throw new Error("Vapi SDK failed to load");
       return Vapi;
     }).catch(function (e) {
