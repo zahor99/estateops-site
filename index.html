@@ -408,9 +408,8 @@
           <div class="roi-row"><span>Conversion lift / yr</span><span class="n tnum" id="o-conv">$36,000</span></div>
           <div class="roi-row"><span>Maintenance membership / yr</span><span class="n tnum" id="o-mem">$14,400</span></div>
           <div class="roi-net"><span class="lab">Modeled year-1 recovery</span><span class="big tnum" id="o-total">$72,900</span></div>
-          <div class="roi-mult">Against a ~$27,000 year-1 investment, about <b id="o-mult">2.7×</b>.</div>
         </div>
-        <p class="roi-note">Illustrative estimate using conservative constants (reactivation 1.5% of the dormant list, a 12% lift in signings, membership at $300/yr × 40% attach) and a representative ~$27k year-1 EstateOps investment. Your result will differ. Modeled from documented industry economics — not a guarantee of results.</p>
+        <p class="roi-note">Illustrative estimate using conservative constants (reactivation 1.5% of the dormant list, a 12% lift in signings, membership at $300/yr × 40% attach). Your result will differ. Modeled from documented industry economics — not a guarantee of results.</p>
       </div>
     </div>
   </div>
@@ -501,7 +500,7 @@
 
   // ROI calculator
   (function(){
-    var REACT=0.015, LIFT=0.12, MEM=300, ATTACH=0.40, INVEST=27000;
+    var REACT=0.015, LIFT=0.12, MEM=300, ATTACH=0.40;
     var plans=document.getElementById('r-plans'), fee=document.getElementById('r-fee'), dorm=document.getElementById('r-dorm');
     if(!plans) return;
     function fmt(n){return '$'+Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');}
@@ -513,12 +512,11 @@
       document.getElementById('v-dorm').textContent=d.toLocaleString('en-US');
       var annual=p*12;
       var react=d*REACT*f, conv=annual*LIFT*f, mem=annual*ATTACH*MEM;
-      var total=react+conv+mem, mult=total/INVEST;
+      var total=react+conv+mem;
       document.getElementById('o-react').textContent=fmt(react);
       document.getElementById('o-conv').textContent=fmt(conv);
       document.getElementById('o-mem').textContent=fmt(mem);
       document.getElementById('o-total').textContent=fmt(total);
-      document.getElementById('o-mult').textContent=(Math.round(mult*10)/10)+'×';
       [plans,fee,dorm].forEach(fill);
     }
     [plans,fee,dorm].forEach(function(el){el.addEventListener('input',calc)});
