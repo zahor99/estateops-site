@@ -174,22 +174,6 @@
   .roi-mult b{color:var(--gold-deep);font-weight:700}
   .roi-note{margin-top:18px;font-size:11px;color:var(--ink-55);line-height:1.55}
 
-  /* PRICING */
-  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);margin-top:46px}
-  @media(max-width:860px){.tiers{grid-template-columns:1fr;max-width:440px;margin-inline:auto}}
-  .tier{background:var(--cream);border:1px solid var(--hair);border-radius:14px;padding:clamp(22px,2.6vw,30px);display:flex;flex-direction:column}
-  .tier.feat{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),var(--shadow)}
-  .tier .badge{align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--claret-deep);background:var(--gold);border-radius:100px;padding:3px 10px;margin-bottom:14px}
-  .tier .nm{font-family:var(--serif);font-weight:600;font-size:21px}
-  .tier .pr{margin-top:12px;display:flex;align-items:baseline;gap:6px}
-  .tier .pr .mo{font-family:var(--serif);font-weight:700;font-size:34px;letter-spacing:-.02em}
-  .tier .pr .per{font-size:13.5px;color:var(--ink-55)}
-  .tier .setup{font-size:12.5px;color:var(--ink-55);margin-top:4px;font-family:var(--num)}
-  .tier ul{list-style:none;margin:20px 0 24px;display:flex;flex-direction:column;gap:10px}
-  .tier li{display:flex;gap:9px;align-items:flex-start;font-size:14px;color:var(--ink-70)}
-  .tier li svg{width:16px;height:16px;color:var(--green);flex-shrink:0;margin-top:3px}
-  .tier .btn{width:100%;justify-content:center;margin-top:auto}
-  .price-note{text-align:center;margin-top:26px;font-size:13.5px;color:var(--ink-55);max-width:64ch;margin-inline:auto}
 
   /* FAQ */
   .faq{max-width:820px;margin-top:42px}
@@ -283,7 +267,6 @@
       <a href="#leaks">The leaks</a>
       <a href="#how">How it works</a>
       <a href="#roi">ROI</a>
-      <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </nav>
     <a class="nav-cta" href="#audit">Book a call</a>
@@ -433,41 +416,6 @@
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Pricing</span>
-      <h2 style="margin-top:14px">Plain tiers. Setup, then monthly.</h2>
-      <p class="lead" style="margin-top:16px">Start on the tier that fits your budget and expand as the recovery compounds. No long lock-in games.</p>
-    </div>
-    <div class="tiers">
-      <div class="tier reveal">
-        <div class="nm">Foundation</div>
-        <div class="pr"><span class="mo tnum">$1,500</span><span class="per">/ mo</span></div>
-        <div class="setup">$2,000 setup</div>
-        <ul><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Custom estate-planning snapshot</li><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Speed-to-lead + missed-call text-back</li><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Database reactivation</li><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Review automation</li></ul>
-        <a class="btn btn-ghost-l" href="#audit" style="color:var(--ink);border-color:var(--hair)">Start here</a>
-      </div>
-      <div class="tier feat reveal">
-        <span class="badge">Most firms start here</span>
-        <div class="nm">Growth</div>
-        <div class="pr"><span class="mo tnum">$2,250</span><span class="per">/ mo</span></div>
-        <div class="setup">$3,500 setup</div>
-        <ul><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Everything in Foundation</li><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Procrastinator nurture + no-show rebooking</li><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Referral-partner engine</li><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> AI conversational intake</li></ul>
-        <a class="btn btn-gold" href="#audit">Start here</a>
-      </div>
-      <div class="tier reveal">
-        <div class="nm">Platform</div>
-        <div class="pr"><span class="mo tnum">$3,000</span><span class="per">/ mo</span></div>
-        <div class="setup">$5,000 setup</div>
-        <ul><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Everything in Growth</li><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Trust-Funding Tracker</li><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Maintenance-membership product</li><li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.5 3.5L13 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Full asset/family mapping</li></ul>
-        <a class="btn btn-ghost-l" href="#audit" style="color:var(--ink);border-color:var(--hair)">Start here</a>
-      </div>
-    </div>
-    <p class="price-note reveal">Founding firms get pilot pricing in exchange for a candid case study. The dormant-reactivation wedge is designed to cover the setup fee up front.</p>
-  </div>
-</section>
 
 <!-- FAQ -->
 <section class="tint" id="faq">
@@ -535,7 +483,7 @@
         <p class="foot-comp">EstateOps is a marketing-operations platform for law firms. It is not a law firm, does not provide legal advice, and does not draft estate-planning documents. ROI figures shown are modeled estimates from documented industry economics, not guarantees of results. EstateOps operates alongside your existing drafting and practice-management tools.</p>
       </div>
       <nav class="foot-links" aria-label="Footer">
-        <a href="#leaks">The leaks</a><a href="#how">How it works</a><a href="#roi">ROI</a><a href="#pricing">Pricing</a><a href="#audit">Book a call</a>
+        <a href="#leaks">The leaks</a><a href="#how">How it works</a><a href="#roi">ROI</a><a href="#audit">Book a call</a>
       </nav>
     </div>
     <div class="foot-bot">© 2026 EstateOps</div>
