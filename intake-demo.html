@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EstateOps — Talk to an AI intake coordinator (demo)</title>
+<meta name="description" content="A live demo of the EstateOps AI intake coordinator for a sample estate-planning firm. It greets, qualifies, captures the details an attorney needs, and books a consult — on sample data. It does not give legal advice.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Talk to an AI intake coordinator — EstateOps demo">
+<meta property="og:description" content="A working voice AI intake agent for an estate-planning firm. Click to talk. Sample data; not legal advice.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --claret:#5A1E2B; --claret-2:#6E2738; --claret-deep:#4A1623;
+    --ivory:#F5F0E7; --ivory-2:#ECE4D6;
+    --ink:#25201E; --ink-70:rgba(37,32,30,.72); --ink-55:rgba(37,32,30,.55);
+    --cream:#F7F2EA; --gold:#C2A05A; --gold-deep:#A07F3C;
+    --green:#2F7A55; --green-bright:#3C9669; --stone:#8A7F76;
+    --hair:rgba(37,32,30,.13);
+    --serif:'Spectral',Georgia,serif; --sans:'Schibsted Grotesk',system-ui,sans-serif;
+    --r:8px; --maxw:760px;
+    --shadow:0 2px 4px rgba(37,32,30,.05),0 24px 56px rgba(37,32,30,.14);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--sans);background:var(--ivory);color:var(--ink);line-height:1.6;
+    -webkit-font-smoothing:antialiased;font-size:17px}
+  h1,h2{font-family:var(--serif);font-weight:600;line-height:1.12;letter-spacing:-.015em}
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding:clamp(28px,6vw,64px) clamp(20px,5vw,40px)}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:600;font-size:18px;color:var(--claret);margin-bottom:40px}
+  .brand .mk{width:26px;height:26px;border-radius:6px;background:var(--claret);color:var(--cream);display:grid;place-items:center;font-size:14px}
+  .eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-deep);font-weight:600}
+  h1{font-size:clamp(30px,5vw,44px);margin:14px 0 0}
+  .lede{font-size:clamp(17px,2vw,19px);color:var(--ink-70);margin:16px 0 0;max-width:60ch}
+  .card{background:var(--cream);border:1px solid var(--hair);border-radius:14px;box-shadow:var(--shadow);
+    margin-top:36px;overflow:hidden}
+  .card-hd{background:var(--claret);color:var(--cream);padding:22px 26px}
+  .card-hd h2{margin:0;font-size:21px;color:var(--cream)}
+  .card-hd p{margin:6px 0 0;font-size:13px;color:rgba(247,242,234,.78);line-height:1.5}
+  .card-bd{padding:26px}
+  .status{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--ink-70);margin-bottom:18px;min-height:22px}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--stone);flex:0 0 auto}
+  .is-live .dot{background:var(--green-bright);animation:pulse 1.4s ease-in-out infinite}
+  .is-connecting .dot{background:var(--gold);animation:pulse 1s ease-in-out infinite}
+  .is-error .dot{background:#b3402f}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .act{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;cursor:pointer;
+    padding:16px;border-radius:var(--r);font-size:17px;font-weight:600;font-family:inherit;transition:background .15s ease,transform .15s ease}
+  .act svg{width:22px;height:22px}
+  .start{background:var(--gold);color:var(--claret-deep)}
+  .start:hover{background:#d3b06a;transform:translateY(-1px)}
+  .end{background:var(--claret-2);color:var(--cream)}
+  .end:hover{background:var(--claret)}
+  .act[disabled]{opacity:.55;cursor:default;transform:none}
+  .transcript{margin-top:20px;max-height:260px;overflow-y:auto;border-top:1px solid var(--hair);padding-top:16px;display:none}
+  .has-transcript .transcript{display:block}
+  .line{margin:0 0 9px;font-size:15px;line-height:1.5}
+  .line b{color:var(--claret)} .line.user b{color:var(--green)}
+  .foot{font-size:13px;color:var(--ink-70);line-height:1.5;margin:18px 0 0}
+  .grid{display:grid;gap:18px;grid-template-columns:1fr 1fr;margin-top:44px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .feat{background:var(--cream);border:1px solid var(--hair);border-radius:var(--r);padding:18px 20px}
+  .feat h3{margin:0 0 6px;font-family:var(--serif);font-size:16px;color:var(--claret)}
+  .feat p{margin:0;font-size:14px;color:var(--ink-70);line-height:1.5}
+  .disc{margin-top:40px;padding:18px 20px;border:1px dashed var(--hair);border-radius:var(--r);
+    font-size:13px;color:var(--ink-55);line-height:1.55;background:rgba(255,255,255,.4)}
+  .pagefoot{margin-top:48px;padding-top:20px;border-top:1px solid var(--hair);font-size:13px;color:var(--ink-55);display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .pagefoot a{color:var(--claret);text-decoration:none}.pagefoot a:hover{text-decoration:underline}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="brand"><span class="mk">E</span> EstateOps</div>
+
+  <span class="eyebrow">Live demo · sample data</span>
+  <h1>Talk to an AI intake coordinator.</h1>
+  <p class="lede">This is what a caller to your firm would experience. The coordinator greets the caller,
+    understands the matter, captures the details your attorney needs, and books a consult — then hands you a
+    clean, ready-to-review summary. It runs here on a sample firm’s data and does not give legal advice.</p>
+
+  <section class="card" id="intake" aria-label="AI intake coordinator demo">
+    <div class="card-hd">
+      <h2>Sample Estate Law — intake</h2>
+      <p>An AI assistant, running on sample data. It captures details and books a consult; it doesn’t give legal advice, quote fees, or replace your attorney.</p>
+    </div>
+    <div class="card-bd">
+      <div class="status" id="status" role="status" aria-live="polite"><span class="dot"></span><span id="statusText">Ready when you are.</span></div>
+      <button class="act start" id="actBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Z" stroke="currentColor" stroke-width="1.8"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span id="actLbl">Start the call</span>
+      </button>
+      <div class="transcript" id="transcript" aria-live="polite"></div>
+      <p class="foot">You’ll be asked to allow your microphone. This is a demonstration assistant; no real legal matter is created and nothing you say here forms an attorney–client relationship.</p>
+    </div>
+  </section>
+
+  <div class="grid">
+    <div class="feat"><h3>Greets &amp; qualifies</h3><p>Identifies the matter — new plan, update, probate, POA/directive, business succession — and adapts.</p></div>
+    <div class="feat"><h3>Captures the facts</h3><p>Name, contact, county, family picture, existing documents, and timeline — structured for your attorney.</p></div>
+    <div class="feat"><h3>Books the consult</h3><p>Offers times and confirms, so a qualified caller never slips through after hours.</p></div>
+    <div class="feat"><h3>Knows its limits</h3><p>No legal advice, no fee quotes. It escalates sensitive situations straight to a human.</p></div>
+  </div>
+
+  <div class="disc">
+    <b>About this demo.</b> “Sample Estate Law” is a fictional firm and all data is illustrative. The assistant
+    is an AI intake coordinator — not a lawyer — and provides no legal or tax advice, no fee quotes, and no
+    outcome promises. In a production deployment for your firm, it answers as your firm, books your calendar,
+    writes to your systems under a data-processing agreement, and discloses to callers that an AI assistant is
+    helping with intake.
+  </div>
+
+  <footer class="pagefoot">
+    <a href="/">← EstateOps home</a>
+    <a href="mailto:hello@estateops.io?subject=EstateOps%20AI%20intake%20demo">Questions? hello@estateops.io</a>
+  </footer>
+</main>
+
+<script type="module">
+  const CONFIG = {
+    publicKey:   "fe1cb697-8f07-4793-bab5-5a084dfde8ba",
+    assistantId: "ffbc0617-1fd0-4f1f-89cd-4f68332354fd",
+    sdkUrl:      "https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.5.2/+esm"
+  };
+  const card = document.getElementById("intake");
+  const statusEl = document.getElementById("status");
+  const statusText = document.getElementById("statusText");
+  const actBtn = document.getElementById("actBtn");
+  const transcriptEl = document.getElementById("transcript");
+  const actLbl = document.getElementById("actLbl");
+  let vapi = null, callActive = false, busy = false, connectTimer = null;
+
+  function setStatus(state, text){
+    card.classList.remove("is-live","is-connecting","is-error");
+    if(state) card.classList.add("is-"+state);
+    if(text!=null) statusText.textContent = text;
+  }
+  function setBtn(mode, label){
+    actBtn.classList.remove("start","end");
+    actBtn.classList.add(mode);
+    actLbl.textContent = label; // dedicated label span — icon untouched
+  }
+  function addLine(who, text, isUser){
+    card.classList.add("has-transcript");
+    const p=document.createElement("p");
+    p.className="line"+(isUser?" user":"");
+    const b=document.createElement("b"); b.textContent=who+": ";
+    p.appendChild(b); p.appendChild(document.createTextNode(text)); // XSS-safe
+    transcriptEl.appendChild(p);
+    transcriptEl.scrollTop = transcriptEl.scrollHeight;
+  }
+
+  function wire(){
+    vapi.on("call-start", ()=>{ if(connectTimer){clearTimeout(connectTimer);connectTimer=null;} callActive=true; busy=false; setStatus("live","Connected — go ahead and speak."); actBtn.disabled=false; setBtn("end","End the call"); });
+    vapi.on("call-end",   ()=>{ callActive=false; busy=false; setStatus(null,"Call ended. Thanks for trying the demo."); actBtn.disabled=false; setBtn("start","Start again"); });
+    vapi.on("speech-start",()=>{ if(callActive) setStatus("live","Listening…"); });
+    vapi.on("speech-end",  ()=>{ if(callActive) setStatus("live","Connected — go ahead and speak."); });
+    vapi.on("error", (e)=>{ console.error("[intake] vapi error", e); if(connectTimer){clearTimeout(connectTimer);connectTimer=null;} callActive=false; busy=false; setStatus("error","Sorry — the connection had a problem. Please try again."); actBtn.disabled=false; setBtn("start","Try again"); });
+    vapi.on("message", (m)=>{ if(m && m.type==="transcript" && m.transcriptType==="final" && m.transcript){ addLine(m.role==="user"?"You":"Coordinator", m.transcript, m.role==="user"); }});
+  }
+
+  actBtn.addEventListener("click", async ()=>{
+    if(busy) return;
+    if(callActive){ busy=true; actBtn.disabled=true; setStatus("live","Ending…"); try{ vapi.stop(); }catch(e){} return; }
+    busy=true; actBtn.disabled=true; setStatus("connecting","Connecting… (allow your microphone)");
+    // Arm the watchdog BEFORE awaiting — a hung start() must never strand the UI.
+    if(connectTimer) clearTimeout(connectTimer);
+    connectTimer = setTimeout(()=>{ if(!callActive){ try{ if(vapi) vapi.stop(); }catch(e){} busy=false; actBtn.disabled=false; setBtn("start","Try again"); setStatus("error","Couldn’t connect. Please try again."); } }, 15000);
+    try{
+      const mod = await import(CONFIG.sdkUrl);
+      // jsDelivr +esm double-wraps the CJS default → class is at mod.default.default
+      const Vapi = (typeof mod.default === "function") ? mod.default
+                 : (mod.default && typeof mod.default.default === "function") ? mod.default.default
+                 : (typeof mod.Vapi === "function") ? mod.Vapi
+                 : (typeof mod === "function") ? mod : null;
+      if(typeof Vapi !== "function") throw new Error("Vapi SDK failed to load");
+      if(!vapi){ vapi = new Vapi(CONFIG.publicKey); wire(); }
+      await vapi.start(CONFIG.assistantId);
+      // call-start clears connectTimer and flips UI to live.
+    }catch(e){
+      console.error("[intake] start failed", e);
+      if(connectTimer){ clearTimeout(connectTimer); connectTimer=null; }
+      busy=false; actBtn.disabled=false; setBtn("start","Try again");
+      setStatus("error","Couldn’t start the call. Check mic permission and try again.");
+    }
+  });
+</script>
+</body>
+</html>
